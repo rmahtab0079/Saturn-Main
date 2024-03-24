@@ -6,50 +6,33 @@
  * @flow strict-local
  */
 
+import { Platform } from 'react-native';
 import React from 'react';
 import {Alert, Button, StyleSheet, Text, View} from 'react-native';
 import {useAuth0, Auth0Provider} from 'react-native-auth0';
 import config from './auth0-configuration';
+import { MD3DarkTheme as DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import NavigationScreen from './src/pages/Navigator';
 
-const Home = () => {
-  const {authorize, clearSession, user, getCredentials, error, isLoading} = useAuth0();
-
-  const onLogin = async () => {
-    await authorize({}, {});
-    const credentials = await getCredentials();
-    Alert.alert('AccessToken: ' + credentials?.accessToken);
-  };
-
-  const loggedIn = user !== undefined && user !== null;
-
-  const onLogout = async () => {
-    await clearSession({}, {});
-  };
-
-
-  if (isLoading) {
-    return <View style={styles.container}><Text>Loading</Text></View>;
-  }
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}> Auth0Sample - Login </Text>
-      {user && <Text>You are logged in as {user.name}</Text>}
-      {!user && <Text>You are not logged in</Text>}
-      <Button
-        onPress={loggedIn ? onLogout : onLogin}
-        title={loggedIn ? 'Log Out' : 'Log In'}
-      />
-      {error && <Text style={styles.error}>{error.message}</Text>}
-    </View>
-  );
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#f7e8d3', // primary color
+    accent: '000000', // your cream color hex code
+    background: '#f7e8d3', // cream color for background
+    text: 'black', // text color
+    // You can add more color adjustments here
+  },
 };
 
 const App = () => {
   return (
+    <PaperProvider theme={theme}>
     <Auth0Provider domain={config.domain} clientId={config.clientId}>
-      <Home />
+      <NavigationScreen />
     </Auth0Provider>
+    </PaperProvider>
   );
 };
 
