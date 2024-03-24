@@ -21,8 +21,7 @@ const LoginScreen = ( { navigation } ) => {
     try {
       await authorize({redirectUrl}, {});
       const credentials = await getCredentials();
-      Alert.alert('AccessToken: ' + credentials?.accessToken);
-      navigation.navigate('Home');
+      navigation.navigate('UserGetterScreen');
     } catch (e) {
       console.error('Authorization Error: ', e);
     }

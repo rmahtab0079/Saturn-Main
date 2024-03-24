@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './Home';
+import UserGetterScreen from './UserGetter';
 import {Text, View} from 'react-native';
 import LoginScreen from './Login';
+import ConnectSocialsScreen from "./ConnectSocials";
+import HomePageScreen from './HomePage';
 import { useAuth0 } from 'react-native-auth0';
-import { useUserContext } from '../contexts/UserContext';
 
 const Stack = createStackNavigator();
 
@@ -28,14 +29,14 @@ const NavigationScreen = () => {
   
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={loggedIn ? "Home" : "Login"}>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Navigator initialRouteName={loggedIn ? "UserGetterScreen" : "LoginScreen"}>
+          <Stack.Screen name="UserGetterScreen" component={UserGetterScreen} />
+          <Stack.Screen name="HomePageScreen" component={HomePageScreen} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="ConnectSocials" component={ConnectSocialsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );
 }
 
 export default NavigationScreen;
-
-

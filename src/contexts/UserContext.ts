@@ -31,7 +31,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </UserContext.Provider>
   );
-};
+}
 
 // Custom hook to use the context
 export const useUserContext = () => useContext(UserContext);

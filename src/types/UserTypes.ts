@@ -26,8 +26,3 @@ export type User = {
 export type UserAttributesFromDynamoDB = {
     userId: string;
 }
-
-
-
-
-
